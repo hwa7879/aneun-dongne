@@ -5,7 +5,7 @@ import Mylike from "./MyLike";
 import { Icon } from "react-icons-kit";
 import { angleUp } from "react-icons-kit/fa/angleUp";
 import Empty from "../../Empty";
-import { getAreaNames } from "../../AreaCodetoName";
+import { getAreaNames } from "../../modules/AreaCodetoName";
 // const Body = styled.div`
 //   grid-template-columns: repeat(3, 1fr);
 //   grid-auto-rows: 50px;

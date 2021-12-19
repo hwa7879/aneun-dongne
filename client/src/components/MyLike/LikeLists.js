@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { getAreaNames } from "../../modules/AreaCodetoName";
 import Icon from "react-icons-kit";
@@ -54,10 +54,8 @@ const LikeLists = ({ postsInfo }) => {
               <div>{postsInfo.post_title}</div>
             </div>
             <Styled.LikeBtn>
-              <div>
-                <i className="fas fa-heart"></i>
-                {postsInfo["Likes.likeCount"]}
-              </div>
+              <i className="fas fa-heart"></i>
+              {postsInfo["Likes.likeCount"]}
             </Styled.LikeBtn>
           </div>
         </Styled.PlaceCard>

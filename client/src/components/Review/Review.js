@@ -141,7 +141,8 @@ const LandingCard = () => {
           <Review>
             <img src="images/kite.png" />
             <ReviewHeader>
-              새로운 동네로의 이사나 출장도 설레어요! ღ'ᴗ'ღ <br />
+              새로운 동네로의 이사나 출장도 설레어요!
+              <br />
               산책하는 재미가 생겼어요!!
             </ReviewHeader>
             <Backview>

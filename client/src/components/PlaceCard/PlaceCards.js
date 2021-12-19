@@ -5,7 +5,10 @@ import axios from "axios";
 import { token, kToken, loginState, loginModal, pickpoint, placelist } from "../../recoil/recoil";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-function PlaceCards({ title, img, addr1, onClick, contentId }) {
+import HashTagTemplate from "../HashTagTemplate/HashTagTemplate";
+//<HashTagTemplate keywordDummy={tags || []} />
+
+function PlaceCards({ title, img, addr1, onClick, contentId, tag }) {
   const placeList = useRecoilValue(placelist);
   const accessToken = useRecoilValue(token);
   const kakaoToken = useRecoilValue(kToken);
@@ -15,49 +18,54 @@ function PlaceCards({ title, img, addr1, onClick, contentId }) {
   const [likeLoading, setLikeLoading] = useState(false);
   const isLogin = useRecoilValue(loginState);
   const setIsLoginOpen = useSetRecoilState(loginModal);
-  useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      const getHashTag = async () => {
-        try {
-          const response = await axios.get(`${process.env.REACT_APP_API_URL}/post/${contentId}`, {
-            headers: {
-              Authorization: `Bearer ${accessToken || kakaoToken}`,
-              "Content-Type": "application/json",
-            },
-            withCredentials: true,
-          });
-          if (response.data.post.post_tags) setTags(response.data.post.post_tags.split(","));
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      const getLike = async () => {
-        try {
-          setLikeLoading(true);
-          const response = await axios.get(`${process.env.REACT_APP_API_URL}/like/${contentId}`, {
-            headers: {
-              Authorization: `Bearer ${accessToken || kakaoToken}`,
-              "Content-Type": "application/json",
-            },
-            withCredentials: true,
-          });
-          const like = { likeOrNot: response.data.data.isLiked, likeCount: response.data.data.likeCount };
-          setLike(like.likeCount);
-          setLikeOrNot(like.likeOrNot);
-          setLikeLoading(false);
-        } catch (e) {
-          console.log(e);
-          setLikeLoading(false);
-        }
-      };
+  const getHashTag = async () => {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/post/${contentId}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken || kakaoToken}`,
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      if (response.data.post.post_tags) setTags(response.data.post.post_tags.split(","));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const getLike = async () => {
+    try {
       setLikeLoading(true);
-      getHashTag();
-      getLike();
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/like/${contentId}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken || kakaoToken}`,
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      const like = { likeOrNot: response.data.data.isLiked, likeCount: response.data.data.likeCount };
+      setLike(like.likeCount);
+      setLikeOrNot(like.likeOrNot);
+      setLikeLoading(false);
+    } catch (e) {
+      console.log(e);
       setLikeLoading(false);
     }
+  };
+  useEffect(() => {
+    let abortController = new AbortController();
+    // let mounted = true;
+    // if (mounted) {
+
+    setLikeLoading(true);
+    getHashTag();
+    getLike();
+    setLikeLoading(false);
+    // }
+    // return () => {
+    //   mounted = false;
+    // };
     return () => {
-      mounted = false;
+      abortController.abort();
     };
   }, [placeList, like, likeOrNot]);
   const LikeHandler = async (e) => {
@@ -119,6 +127,15 @@ function PlaceCards({ title, img, addr1, onClick, contentId }) {
   return (
     <Styled.PlaceCard onClick={onClick}>
       <div className="place-cards">
+        {!tags[0] ? (
+          <Styled.Tags>&nbsp;</Styled.Tags>
+        ) : (
+          <Styled.Tags>
+            {tags.map((el) => {
+              return <Styled.Tag>{"#" + el}</Styled.Tag>;
+            })}
+          </Styled.Tags>
+        )}
         {img ? <img src={img} /> : <img src="./images/not-image-yet.png" />}
         <div className="place-cards-title">
           <div>{`[${addr1}] `}</div>

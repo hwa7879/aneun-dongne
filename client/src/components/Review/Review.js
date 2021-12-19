@@ -50,7 +50,7 @@ export const ReviewHeader = styled.div`
   margin-right: 10%;
   margin-top: 10%;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   @media screen and (max-width: 780px) {
     position: center;
     text-align: center;

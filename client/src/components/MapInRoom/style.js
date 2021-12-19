@@ -4,9 +4,7 @@ export const Styled = {
   Div: styled.div`
     position: relative;
     width: 100%;
-
-    height: 100%:
-
+    height: 100%;
     margin-top: 3%;
     margin-bottom: 50px;
     margin-left: auto;
@@ -27,6 +25,7 @@ export const Styled = {
       transition: all 0.3s ease;
     }
   `,
+
   Map: styled.div`
     width: 600px;
     height: 400px;

@@ -47,7 +47,7 @@ function MainPage() {
             <Styled.Image>
               <img className="illust" src="images/mapclick.png" />
 
-              <img className="play-popular" src="/images/location03.gif" muted autoPlay loop playsInline />
+              <img className="play-popular" src="/images/main01.gif" muted autoPlay loop playsInline />
             </Styled.Image>
           </Styled.VideoContainer>
         </Styled.PopularTitleView>
@@ -56,7 +56,7 @@ function MainPage() {
           <div className="title">여러분의 관심사에 알맞는 관광지를 찾아드릴 수 있어요.</div>
           <Styled.VideoContainer>
             <Styled.Image>
-              <img className="play-focus" src="/images/hashtag02.gif" muted autoPlay loop playsInline />
+              <img className="play-focus" src="/images/main02.gif" muted autoPlay loop playsInline />
               <img className="illust" src="images/mapimgpeople.png" />
             </Styled.Image>
           </Styled.VideoContainer>
@@ -68,7 +68,7 @@ function MainPage() {
             <Styled.Image>
               <img className="illust" src="images/likeimg.png" />
 
-              <img className="play-diy" src="/images/diy02.gif" muted autoPlay loop playsInline />
+              <img className="play-diy" src="/images/main03.gif" muted autoPlay loop playsInline />
             </Styled.Image>
           </Styled.VideoContainer>
         </Styled.DiyTitleView>
